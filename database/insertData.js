@@ -1,3 +1,5 @@
+const Booking = require('./bookingSchema.js')
+
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -9,16 +11,20 @@ function generateRandomDates(numberOfDates) {
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!
   var yyyy = today.getFullYear();
-  var numbOfDaysInMonthExc = 0;
+  var numbOfDaysInMonth = 0;
 
   var randomDates = [];
 
-  function getRandomDateAccordingToMonth(daysInMonth) {
-    var randomDay = getRandomIntInclusive(daysInMonth, numbOfDaysInMonthExc);
+  function getRandomDateAccordingToMonth(numbOfDaysInMonth) {
+    
         var randomYear = getRandomIntInclusive(yyyy, (yyyy + 3));
-
         if(randomYear === yyyy) {
           var randomMonth = getRandomIntInclusive(mm , 13);
+            if(randomMonth === mm) {
+              var randomDay = getRandomIntInclusive(dd, numbOfDaysInMonth)
+            } else {
+              var randomDay = getRandomIntInclusive(1, numbOfDaysInMonth)
+            }
         } else {
           var randomMonth = getRandomIntInclusive(1, 13);
         }
@@ -66,3 +72,13 @@ function insertDummyData(numberOfDocs) {
   }
   return dataArray;
 }
+
+var data = insertDummyData(5);
+
+Booking.insertMany(data)
+  .then((doc) => {
+    console.log('successfully inserted data: ' , doc)
+  })
+  .catch((err) => {
+    console.log('did not insert data: ', err)
+  })
