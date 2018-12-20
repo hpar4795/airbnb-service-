@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost:27017/flarebnb')
 
-db.connection();
+
 
 
 const bookingSchema = new mongoose.Schema({
@@ -10,7 +10,7 @@ const bookingSchema = new mongoose.Schema({
   check_out: Date,
   guest_count: Number,
   views: Number,
-  rating: Float32Array,
+  rating: Number,
   rating_count: Number
 })
 

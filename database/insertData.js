@@ -11,22 +11,23 @@ function generateRandomDates(numberOfDates) {
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!
   var yyyy = today.getFullYear();
-  var numbOfDaysInMonth = 0;
+  var numbOfDaysInMonthExc = 0;
 
   var randomDates = [];
 
-  function getRandomDateAccordingToMonth(numbOfDaysInMonth) {
-    
-        var randomYear = getRandomIntInclusive(yyyy, (yyyy + 3));
-        if(randomYear === yyyy) {
-          var randomMonth = getRandomIntInclusive(mm , 13);
+  function getRandomDateAccordingToMonth(daysInMonth) {
+    var randomYear = getRandomIntInclusive((yyyy), (yyyy + 3));
+    var randomMonth = 0;
+    var randomDay = 0;
+    if(randomYear === yyyy) {
+          randomMonth = getRandomIntInclusive(mm , 13);
             if(randomMonth === mm) {
-              var randomDay = getRandomIntInclusive(dd, numbOfDaysInMonth)
+              randomDay = getRandomIntInclusive(dd, daysInMonth); 
             } else {
-              var randomDay = getRandomIntInclusive(1, numbOfDaysInMonth)
+              randomDay = getRandomIntInclusive(1, daysInMonth); 
             }
         } else {
-          var randomMonth = getRandomIntInclusive(1, 13);
+          randomMonth = getRandomIntInclusive(1, 13);
         }
         var date = new Date(randomYear, randomMonth, randomDay);
         randomDates.push(date);
@@ -73,12 +74,11 @@ function insertDummyData(numberOfDocs) {
   return dataArray;
 }
 
-var data = insertDummyData(5);
-
-Booking.insertMany(data)
+var data = insertDummyData(4);
+Booking.insertMany( data)
   .then((doc) => {
     console.log('successfully inserted data: ' , doc)
   })
   .catch((err) => {
-    console.log('did not insert data: ', err)
+   console.log('did not insert data: ', err)
   })
