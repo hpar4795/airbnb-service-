@@ -1,11 +1,7 @@
 var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://localhost:27017/flarebnb')
 
-
-
-
-const bookingSchema = new mongoose.Schema({
-  unavailability: [Date],
+const bookingSchema = mongoose.Schema({
+  id: Number,
   check_in: Date,
   check_out: Date,
   guest_count: Number,
@@ -14,6 +10,6 @@ const bookingSchema = new mongoose.Schema({
   rating_count: Number
 })
 
-const Booking = db.model('bookings', bookingSchema );
+const Booking = mongoose.model('bookings', bookingSchema );
 
 module.exports = Booking;

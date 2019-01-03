@@ -58,6 +58,7 @@ function insertDummyData(numberOfDocs) {
   var dataArray = [];
   for(var i = 0; i < numberOfDocs; i++) {
       var dataObj = {};
+      dataObj.id = i;
       var numbOfRandomDates = getRandomIntInclusive(0, 100);
       dataObj.unavailability = generateRandomDates(numbOfRandomDates);
       var guestCount = getRandomIntInclusive(0, 9);
@@ -77,7 +78,7 @@ function insertDummyData(numberOfDocs) {
 var data = insertDummyData(4);
 Booking.insertMany( data)
   .then((doc) => {
-    console.log('successfully inserted data: ' , doc)
+    console.log('successfully inserted data')
   })
   .catch((err) => {
    console.log('did not insert data: ', err)
