@@ -1,0 +1,35 @@
+.test {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  background-color: rgb(255, 255, 255) !important;
+  margin: 0px !important;
+  margin-top: 16px;
+  margin-bottom: 24px;
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: rgb(228, 228, 228) !important;
+  border-image: initial !important;
+  font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.43;
+  color: #484848;
+  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dropdownbuttonTitle {
+  font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 19px;
+  line-height: 1.43;
+  color: #484848;
+}
+.Guests {
+  font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.43;
+  color: #484848;
+  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

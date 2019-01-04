@@ -1,15 +1,35 @@
 var mongoose = require('mongoose');
 
-const bookingSchema = mongoose.Schema({
+const listingSchema = new mongoose.Schema({
   id: Number,
-  check_in: Date,
-  check_out: Date,
-  guest_count: Number,
   views: Number,
   rating: Number,
-  rating_count: Number
+  maxGuests: Number,
+  price: Number,
+  numbOfRatings: Number
+})
+
+const bookingSchema = new mongoose.Schema({
+  startDate: Date,
+  endDate: Date,
+  guests: Number,
+  cost: Number,
+  listing_id: Number
+})
+
+const priceSchema = new mongoose.Schema({
+  start: Date,
+  end: Date,
+  price: Number,
+  listing_id: Number
 })
 
 const Booking = mongoose.model('bookings', bookingSchema );
+const Listing = mongoose.model('listing', listingSchema );
+const Price = mongoose.model('price', priceSchema );
 
-module.exports = Booking;
+module.exports =  {
+  Booking: Booking,
+  Listing: Listing,
+  Price: Price
+}
