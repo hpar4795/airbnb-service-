@@ -4,6 +4,7 @@ var { Booking } = require("../database/bookingSchema.js");
 var { Listing } = require("../database/bookingSchema.js");
 var { Price } = require("../database/bookingSchema.js");
 var path = require("path");
+const cors = require('cors')
 
 var db = require("../database/db.js");
 
@@ -15,6 +16,7 @@ app.listen(3004, () => {
 
 app.use(bodyparser.json());
 app.use("/", express.static(path.join(__dirname, "../react_client/dist")));
+app.use(cors())
 
 // app.get('/', (req, res) => {
 //   res.send('ok')
