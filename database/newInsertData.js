@@ -4,7 +4,6 @@ const {Price} = require('./bookingSchema.js')
 const moment = require('moment');
 const db = require('./db.js')
 
-//console.log(moment())
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -32,8 +31,8 @@ for(var i = 1; i < 101; i++) {
 
 Listing.insertMany(Data)
 .then((docs) => {
-  console.log(docs[0])
-  console.log("docs.length", docs.length)
+  console.log("successfully inserted listing")
+ 
 })
 .catch((err) => {
   console.error(err)

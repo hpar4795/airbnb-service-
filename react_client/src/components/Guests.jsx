@@ -25,7 +25,6 @@ class Guests extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.numbOfAdults, this.props.numbOfChildren)
   }
 
   handleButtonClickSubtractInfants() {

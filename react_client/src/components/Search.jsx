@@ -18,7 +18,6 @@ class Search extends React.Component {
     
     Axios.get('/bookings')
     .then((res) => {
-      console.log('response from handleClick', res);
     })
     .catch((err) => {
       console.error(err);

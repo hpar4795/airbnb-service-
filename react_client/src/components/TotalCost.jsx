@@ -10,19 +10,19 @@ function TotalCost(props) {
       <div>
         <div>
           <span>${props.pricePerNight}x{numbOfNights}</span>
-          <span>           { costAllNights}</span>
+          <span>{ costAllNights}</span>
         </div>
         <div>
           <span>Cleaning Fee</span>
-          <span>           {props.cleaningFee}</span>
+          <span>{props.cleaningFee}</span>
         </div>
         <div>
           <span>Service Fee</span>
-          <span>           {props.serviceFee}</span>
+          <span>{props.serviceFee}</span>
         </div>
         <div>
           <span>Total</span>
-          <span>           {costAllNights + props.cleaningFee + props.serviceFee}</span>
+          <span>{costAllNights + props.cleaningFee + props.serviceFee}</span>
         </div>
       </div>
     )
