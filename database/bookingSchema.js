@@ -6,7 +6,9 @@ const listingSchema = new mongoose.Schema({
   rating: Number,
   maxGuests: Number,
   price: Number,
-  numbOfRatings: Number
+  numbOfRatings: Number,
+  cleaningFee: Number,
+  serviceFee: Number
 })
 
 const bookingSchema = new mongoose.Schema({

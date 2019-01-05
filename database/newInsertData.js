@@ -23,7 +23,9 @@ for(var i = 1; i < 101; i++) {
   obj.rating = getRandomArbitrary(1, 5);
   obj.maxGuests = getRandomInt(1, 10);
   obj.price = getRandomInt(30, 300);
-  obj.numbOfRatings = getRandomInt(20, 200)
+  obj.numbOfRatings = getRandomInt(20, 200);
+  obj.cleaningFee = getRandomInt(10, 40);
+  obj.serviceFee = getRandomInt(10, 30);
   Data.push(obj)
 }
 

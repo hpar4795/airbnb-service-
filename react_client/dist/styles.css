@@ -1,21 +1,41 @@
 .test {
+  position: fixed;
+  top: 75px;
+  background-color: rgb(255, 255, 255) !important;
+  margin-left: 45px !important;
+  padding-top: 16px;
+  padding-bottom: 24px;
+  width: 376px !important;
+  z-index: 3 !important;
   padding-left: 24px !important;
   padding-right: 24px !important;
-  background-color: rgb(255, 255, 255) !important;
-  margin: 0px !important;
-  margin-top: 16px;
-  margin-bottom: 24px;
   border-width: 1px !important;
   border-style: solid !important;
   border-color: rgb(228, 228, 228) !important;
   border-image: initial !important;
-  font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 14px;
-  line-height: 1.43;
-  color: #484848;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+  overflow-wrap: break-word !important;
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.firstLine {
+  border-bottom-width: var(--border-rule-border-width, 1px) !important;
+  border-bottom-color: var(--color-divider, #EBEBEB) !important;
+}
+
+.price {
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+  overflow-wrap: break-word !important;
+  font-weight: 700 !important;
+  line-height: 1.44444em !important;
+  font-size: 22px !important;
+}
+
+.pricePerNight {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.33333em !important;
 }
 
 .dropdownbuttonTitle {

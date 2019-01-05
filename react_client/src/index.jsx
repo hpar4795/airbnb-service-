@@ -7,6 +7,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment';
 import momentPropTypes from 'moment';
 import Guests from './components/Guests.jsx';
+import TotalCost from './components/TotalCost.jsx'
 import Axios from 'axios'
 
 import {Button} from 'react-bootstrap'
@@ -24,12 +25,15 @@ class App extends React.Component{
       rating: 0,
       numbOfViews: 0,
       numbOfRatings: 0,
-      currentNumberOfGuests: 0,
+      cleaningFee: 0,
+      serviceFee: 0,
+      currentNumberOfGuests: 1,
       maxGuests: 0,
-      numbOfAdults: 0,
+      numbOfAdults: 1,
       numbOfChildren: 0,
       startDate: null,
-      endDate: null
+      endDate: null,
+      renderTotal: false
 
     }
     this.getStaticBookingData = this.getStaticBookingData.bind(this);
@@ -53,7 +57,9 @@ class App extends React.Component{
         rating: data.data[0].rating,
         numbOfViews: data.data[0].views,
         numbOfRatings: data.data[0].numbOfRatings,
-        maxGuests: data.data[0].maxGuests
+        maxGuests: data.data[0].maxGuests,
+        cleaningFee: data.data[0].cleaningFee,
+        serviceFee: data.data[0].serviceFee
       })
     })
   }
@@ -123,23 +129,30 @@ class App extends React.Component{
 
 
   render() {
+    var renderTotal = false;
+    if(this.state.startDate !== null && this.state.endDate !== null) {
+      renderTotal = true;
+    }
     return (
       <div className="test">
-      <span> ${this.state.pricePerNight} per night</span>
+      <span className="price"> ${this.state.pricePerNight}</span>
+      <span className="pricePerNight"> per night</span>
       <br></br>
       <span>  {this.state.numbOfRatings}</span>
 
   <br></br>
+  <div className="firstLine"></div>
+  <div className="DateRangePicker"></div>
   <DateRangePicker
   startDate={this.state.startDate} // momentPropTypes.momentObj or null,
   startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
   endDate={this.state.endDate} // momentPropTypes.momentObj or null,
   endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
-  onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
+  onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate , renderTotal: true})} // PropTypes.func.isRequired,
   focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
   onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-  startDatePlaceholderText= {"check-in"}
-  endDatePlaceholderText= {"check-out"}
+  startDatePlaceholderText= {"Checkin"}
+  endDatePlaceholderText= {"Checkout"}
   showClearDates= {true}
   />
   <Guests
@@ -151,11 +164,19 @@ class App extends React.Component{
     handleButtonClickAddChildren={this.handleButtonClickAddChildren}
     handleButtonClickSubtractAdults={this.handleButtonClickSubtractAdults}
     handleButtonClickSubtractChildren={this.handleButtonClickSubtractChildren}
-  
-  
   />
+  
+    <TotalCost
+      renderTotalCost={renderTotal}
+      cleaningFee={this.state.cleaningFee}
+      serviceFee={this.state.serviceFee}
+      pricePerNight={this.state.pricePerNight}
+      endDate={this.state.endDate}
+      startDate={this.state.startDate}
+    />
+
   <br></br>
-   <Button onClick={this.handleBookClick}>Request To Book</Button>
+   <Button onClick={this.handleBookClick}>Book</Button>
     </div>
     )
   }
