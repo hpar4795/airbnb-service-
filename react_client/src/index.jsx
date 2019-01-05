@@ -33,7 +33,8 @@ class App extends React.Component{
       numbOfChildren: 0,
       startDate: null,
       endDate: null,
-      renderTotal: false
+      renderTotal: false,
+      blockedDays: []
 
     }
     this.getStaticBookingData = this.getStaticBookingData.bind(this);
@@ -48,10 +49,26 @@ class App extends React.Component{
   componentDidMount() {
     this.setState({listing_id: Number(window.location.href.split('/')[window.location.href.split('/').length - 1].slice(1, 4))}, () => {
       this.getStaticBookingData(this.state.listing_id)
+      Axios.get('/bookings')
+      .then((docs) => {
+        console.log(docs.data)
+        var blockedDays = [];
+        var bookings = docs.data;
+          bookings.forEach((booking) => {
+            blockedDays.push(booking.startDate)
+            while(booking.startDate <= booking.endDate) {
+              blockedDays.push(booking.startDate.add(1, 'days'))
+            }
+          })
+        this.setState({blockedDays: blockedDays})
+        console.log('blockeddays', this.state.blockedDays)
+      })
     });
+
+    
   }
   getStaticBookingData(listing_id) {
-    Axios.get('/bookings', {params: {id: listing_id}})
+    Axios.get('/listings', {params: {id: listing_id}})
     .then((data) => {
       this.setState({pricePerNight: data.data[0].price,
         rating: data.data[0].rating,
@@ -64,26 +81,26 @@ class App extends React.Component{
     })
   }
  
-  // getStars(rating) {
+  getStars(rating) {
 
-  //   // Round to nearest half
-  //   rating = Math.round(rating * 2) / 2;
-  //   let output = [];
+    // Round to nearest half
+    rating = Math.round(rating * 2) / 2;
+    let output = [];
   
-  //   // Append all the filled whole stars
-  //   for (var i = rating; i >= 1; i--)
-  //     output.push(<i class="fa fa-star" aria-hidden="true"> </i>);
+    // Append all the filled whole stars
+    for (var i = rating; i >= 1; i--)
+      output.push(<i class="fa fa-star" aria-hidden="true"> </i>);
   
-  //   // If there is a half a star, append it
-  //   if (i == .5) output.push(<i class="fa fa-star-half-o" aria-hidden="true" > </i>);
+    // If there is a half a star, append it
+    if (i == .5) output.push(<i class="fa fa-star-half-o" aria-hidden="true" > </i>);
   
-  //   // Fill the empty stars
-  //   for (let i = (5 - rating); i >= 1; i--)
-  //     output.push(<i class="fa fa-star-o" aria-hidden="true"> </i>);
+    // Fill the empty stars
+    for (let i = (5 - rating); i >= 1; i--)
+      output.push(<i class="fa fa-star-o" aria-hidden="true"> </i>);
   
-  //   return output;
+    return output;
   
-  // }
+  }
 
   handleButtonClickSubtractAdults() {
     console.log('subtracting adult');
@@ -126,6 +143,8 @@ class App extends React.Component{
     })
   }
 
+  // isDayBlocked(day)
+
 
 
   render() {
@@ -138,7 +157,8 @@ class App extends React.Component{
       <span className="price"> ${this.state.pricePerNight}</span>
       <span className="pricePerNight"> per night</span>
       <br></br>
-      <span>  {this.state.numbOfRatings}</span>
+      <span>{this.getStars(this.state.rating)}</span>
+      <span>{this.state.numbOfRatings}</span>
 
   <br></br>
   <div className="firstLine"></div>

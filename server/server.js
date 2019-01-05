@@ -21,7 +21,7 @@ app.use(cors())
 // app.get('/', (req, res) => {
 //   res.send('ok')
 // })
-app.get("/bookings", (req, res) => {
+app.get("/listings", (req, res) => {
   var id = req.query.id;
 
   Listing.find({ id: id })
@@ -32,12 +32,25 @@ app.get("/bookings", (req, res) => {
       console.error(err);
     });
 });
+app.get("/bookings", (req, res) => {
+  var id = req.query.id;
+  console.log("getting bookings")
+  Booking.find({ id: id })
+    .then(doc => {
+      console.log(doc)
+      res.send(doc);
+
+    })
+    .catch(err => {
+      console.error(err);
+    });
+});
 
 app.post("/bookings", (req, res) =>{
   var data = req.body;
   Booking.create(data)
   .then((doc) => {
-    console.log("created new doc", doc)
+    //console.log("created new doc", doc)
   })
   .catch((err) =>{
     console.error(err)
