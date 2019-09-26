@@ -1,1 +1,1 @@
-# airbnb-service-
+# airbnb-bookings-service
